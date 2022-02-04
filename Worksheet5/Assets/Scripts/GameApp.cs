@@ -6,15 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class GameApp : Singleton<GameApp>
 {
-  // Start is called before the first frame update
+  public bool Pause = false;
+
   void Start()
   {
     SceneManager.LoadScene("Menu");
   }
 
-  // Update is called once per frame
   void Update()
   {
+    if(Input.GetKeyDown(KeyCode.Escape)) GamePause(!Pause);
+  }
 
+  public void GamePause(bool _pause){
+    Pause = _pause;
+    if(Pause){
+      Time.timeScale = 0f;
+    }
+    else{
+      Time.timeScale = 1f;
+    }
   }
 }
